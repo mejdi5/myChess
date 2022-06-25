@@ -30,7 +30,7 @@ if (process.env.NODE_ENV === 'production') {
 }
 
 //connect database
-dotenv.config({ path: './backend/.env'});
+dotenv.config({ path: './.env'});
 try {
     mongoose.connect(process.env.MONGO_URI, { 
     useNewUrlParser: true,
