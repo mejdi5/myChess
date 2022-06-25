@@ -47,6 +47,7 @@ const Login = () => {
 };
 
 
+
   return (
     <div>
       <Button variant="success" onClick={() => setShow(true)}>Sign In</Button>
@@ -96,7 +97,9 @@ const Login = () => {
           <Form className="g-login">
           <strong style={{marginLeft:'25%'}}>Or</strong><br></br>
             <GoogleLogin
-            clientId="496829602002-2k01fdl4q3l8ljnjgeroqvkq4e6iv2go.apps.googleusercontent.com"
+            clientId={process.env.NODE_ENV === 'development'
+            ? process.env.REACT_APP_DEV_CLIENT_ID
+            : process.env.REACT_APP_PROD_CLIENT_ID}
             buttonText="Sign In With Google"
             onSuccess={googleSuccess}
             onFailure={() => console.log('Google Sign In Unsuccessful. Try Again Later')}
