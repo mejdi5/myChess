@@ -1,9 +1,9 @@
-import axios from 'axios';
 import {GET_INVITATIONS} from './ActionTypes'
+import { Axios } from '../../axios';
 
 //get invitations received by one user
 export const getInvitations = (userId) => (dispatch) => {
-    axios
+    Axios
     .get(`/api/invitations/${userId}`)
     .then((res) => dispatch({ type: GET_INVITATIONS, payload: res.data }))
     .catch((err) => console.log(err));
@@ -11,7 +11,7 @@ export const getInvitations = (userId) => (dispatch) => {
 
 //post new invitation
 export const postInvitation = (newInvitation, userId) => (dispatch) => {
-    axios
+    Axios
     .post(`/api/invitations`, newInvitation)
     .then((res) => dispatch(getInvitations(userId)))
     .catch((err) => console.log(err));
@@ -19,7 +19,7 @@ export const postInvitation = (newInvitation, userId) => (dispatch) => {
 
 //Delete an invitation
 export const deleteInvitation = (invitationId, userId) => (dispatch) => {
-    axios
+    Axios
     .delete(`/api/invitations/delete/${invitationId}`)
     .then((res) => dispatch(getInvitations(userId)))
     .catch((err) => console.log(err));

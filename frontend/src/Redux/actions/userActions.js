@@ -1,4 +1,3 @@
-import axios from 'axios';
 import {
   LOGIN_USER,
   REGISTER_USER,
@@ -7,13 +6,13 @@ import {
   AUTH_ERRORS,
   GET_USERS, 
 } from './ActionTypes';
-
+import { Axios } from '../../axios';
 
 
 // Register User
 export const registerUser = (formData) => async (dispatch) => {
   try {
-    const res = await axios.post('/api/users/register', formData);
+    const res = await Axios.post('/api/users/register', formData);
     dispatch({
       type: REGISTER_USER,
       payload: res.data, 
@@ -41,7 +40,7 @@ export const registerUser = (formData) => async (dispatch) => {
 export const loginUser = (formData) => async (dispatch) => {
 
   try {
-    const res = await axios.post('/api/users/login', formData);
+    const res = await Axios.post('/api/users/login', formData);
     dispatch({
       type: LOGIN_USER,
       payload: res.data, 
@@ -75,7 +74,7 @@ export const getAuthUser = () => async (dispatch) => {
         'x-auth-token': localStorage.getItem('x-auth-token'),
       },
     };
-    const res = await axios.get('/api/users/authUser', config);
+    const res = await Axios.get('/api/users/authUser', config);
     dispatch({
       type: GET_AUTH_USER,
       payload: res.data, 
@@ -97,7 +96,7 @@ export const logout = () => (dispatch) => {
 
 //Get all users
 export const getAllUsers = () => (dispatch) => {
-    axios
+    Axios
     .get("/api/users/allUsers")
     .then((res) => dispatch({ type: GET_USERS, payload: res.data }))
     .catch((err) => console.log(err));
@@ -105,7 +104,7 @@ export const getAllUsers = () => (dispatch) => {
 
 //Delete a user
 export const deleteUser = (idUser) => (dispatch) => {
-    axios
+    Axios
     .delete(`/api/users/delete/${idUser}`)
     .then((res) => dispatch(getAllUsers()))
     .catch((err) => console.log(err));
@@ -114,7 +113,7 @@ export const deleteUser = (idUser) => (dispatch) => {
 //Update a user
 export const editUser = (id, editedUser) => async (dispatch) => {
   try {
-    const res = await axios.put(`/api/users/update/${id}`, editedUser )
+    const res = await Axios.put(`/api/users/update/${id}`, editedUser )
     dispatch(getAllUsers());
   } catch (error) {
     console.dir(error);

@@ -3,9 +3,8 @@ import isEmail from 'validator/es/lib/isEmail';
 import {Card, Button, Modal, Form} from 'react-bootstrap'
 import { useDispatch, useSelector } from 'react-redux';
 import { editUser, deleteUser } from '../../Redux/actions/userActions';
-import axios from 'axios'
 import { useNavigate } from 'react-router-dom';
-
+import { Axios } from '../../axios';
 
 
 export default function Profile() {
@@ -33,7 +32,7 @@ export default function Profile() {
         e.preventDefault()
         const formData = new FormData()
         formData.append('image', image)
-        axios.post(`/api/pictures/upload`, formData)
+        Axios.post(`/api/pictures/upload`, formData)
         .then(res => {
             const editedUser = {
                 userName: user.userName,
@@ -49,7 +48,7 @@ export default function Profile() {
     //delete picture
     const removePicture = (e) => {
         e.preventDefault()
-        axios
+        Axios
         .delete(`/api/pictures/delete/${user.picture._id}`)
         .then(res => {
             const editedUser = {

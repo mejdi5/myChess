@@ -2,8 +2,7 @@ import React,{useState, useEffect} from 'react'
 import { useDispatch } from 'react-redux';
 import { getAuthUser } from '../../Redux/actions/userActions';
 import { Spinner, Card } from 'react-bootstrap';
-import axios from 'axios'
-
+import { Axios } from '../../axios';
 function Home() {
 
   const dispatch = useDispatch();
@@ -14,7 +13,7 @@ function Home() {
   , []);
 
   useEffect(() => 
-    axios
+    Axios
       .get('https://api.chess.com/pub/leaderboards')
       .then(res => setDatas(res.data.tactics))
       .catch(error => console.log(error))

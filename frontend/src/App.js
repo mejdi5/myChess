@@ -18,7 +18,6 @@ import RandomGame from './components/pages/RandomGame';
 import  Chess from 'chess.js'
 
 
-
 function App() {
 
   const dispatch = useDispatch();
