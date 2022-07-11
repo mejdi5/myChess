@@ -5,6 +5,12 @@ import {Button, Modal, Form} from 'react-bootstrap';
 import { loginUser } from '../../Redux/actions/userActions';
 import { GoogleLogin } from 'react-google-login';
 import { registerUser } from '../../Redux/actions/userActions';
+import {gapi} from "gapi-script"
+
+
+if(process.env.NODE_ENV === 'production') {
+  gapi.load("client:auth2", () => { gapi.client.init({ clientId: process.env.REACT_APP_PROD_CLIENT_ID, plugin_name: "chat", }); });
+}
 
 
 const Login = () => {
