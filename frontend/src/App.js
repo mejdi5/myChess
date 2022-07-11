@@ -15,7 +15,7 @@ import Invitations from './components/pages/Invitations';
 import Games from './components/pages/Games';
 import GameShow from './components/pages/GameShow';
 import RandomGame from './components/pages/RandomGame';
-import  Chess from 'chess.js'
+import Chess from 'chess.js'
 
 
 function App() {
@@ -49,7 +49,8 @@ function App() {
 
   useEffect(() => {
     //socket config
-    socket.current = io("http://localhost:5000");
+    const url = process.env.NODE_ENV === 'development' ? "http://localhost:5000" : "https://mychess1.herokuapp.com/"
+    socket.current = io(url);
     //set and get online users
     socket.current.emit("addUser", user?._id);
     socket.current.on("getUsers", Users => {
