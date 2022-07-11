@@ -21,14 +21,6 @@ app.use("/api/pictures", require('./backend/routes/pictureRoute'));
 app.use("/api/games", require('./backend/routes/gameRoute'));
 app.use("/api/invitations", require('./backend/routes/invitationRoute'));
 
-//deploy
-if (process.env.NODE_ENV === 'production') {
-    app.use(express.static('frontend/build'));
-    app.get('*', (req, res) => {
-        res.sendFile(path.join(__dirname, 'frontend', 'build', 'index.html'));
-    });
-}
-
 //connect database
 dotenv.config({ path: './.env'});
 try {
@@ -40,6 +32,13 @@ try {
 } catch (error) {
     console.log(`Database is not connected...`.red.bold);
 }
+
+//deploy
+    app.use(express.static('frontend/build'));
+    app.get('/*', (req, res) => {
+        res.sendFile(path.join(__dirname, 'frontend', 'build', 'index.html'));
+    });
+
 
 const port = process.env.PORT || 5000
 
